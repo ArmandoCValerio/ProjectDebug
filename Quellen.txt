@@ -1,0 +1,1 @@
+http://docs.sencha.com/touch/2.2.1/#!/api/Ext.Component-cfg-xtype
