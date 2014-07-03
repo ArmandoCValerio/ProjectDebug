@@ -5,7 +5,26 @@ Ext.define('Kontaktliste.view.KontaktList',
 	config: 
 	{
 		store: 'Kontakte',
+		plugins: 
+		[
+			{
+				xclass: 'Ext.plugin.ListPaging',
+				autoPaging: false,
+				loadMoreText: 'Weitere Kontakte ...',
+				noMoreRecordsText: 'Keine weiteren Kontakte!'
+			},
+			
+			{
+                xclass: 'Ext.plugin.PullRefresh',
+                pullRefreshText: 'Aktualisieren...',
+				
+            }
+		],
+		
 		itemTpl: '<div>Name: {cNName}, {cVName}</div><div>Mail: {cMail}</div><div>Phone: {cPhone}</div>',
-		emptyText: 'keine Kontakte'		
-	}
+		title: 'Kontaktliste',
+		grouped: true,
+		emptyText: 'keine Kontakte'
+	
+	},
 });

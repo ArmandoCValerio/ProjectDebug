@@ -7,16 +7,23 @@ Ext.define('Kontaktliste.controller.AppController',
 		{
 				kontaktlist:
 				{
-					itemtap: 'showKontaktDetails'
+					//doubletap: 'initKontaktList',
+					itemtap: 'showKontaktDetails',
+					releaseRefreshText: 'Lass loss...',
+				},
+				
+				main:
+				{
+					doubletap: 'initKontaktList',
 				}
 		},
+
 		refs: 
 		{
-			main: 'main'
+			main: 'main',
 		}
 	},
 		
-	
 	showKontaktDetails: function(list, index, target, record)
 	{
 		var main = this.getMain();
@@ -29,10 +36,16 @@ Ext.define('Kontaktliste.controller.AppController',
 		main.push(kontaktForm);	
 	},
 	
+	initKontaktList: function(list, index, target, record)
+	{
+		Ext.Msg.alert('Ausgeführt:', 'itemdoubletap');
+		console.log('element tap!');
+	},
+	
 	computeAge: function(bDate)
 	{	
 		var wAlter = "";
-		
+					
 		if  (bDate != "") 
 		{
 			today = new Date();
@@ -43,19 +56,20 @@ Ext.define('Kontaktliste.controller.AppController',
 			
 			if (tag < 0)
 			{
-				tag = 30 + tag; monat--;
+				tag = 30 + tag;
+				monat--;
 			};
 			
 			if (monat < 0)
 			{
-				monat = 12 + monat; jahr--;
+				monat = 12 + monat;
+				jahr--;
 			};
 			
 			wAlter    = jahr + ' Jahre ' +
 						'- ' + monat + ' Monat(e) ' +
 						'- ' + tag + ' Tag(e)';
 		};
-
 		return wAlter;
 	}
 	

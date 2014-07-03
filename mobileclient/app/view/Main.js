@@ -4,11 +4,14 @@ Ext.define('Kontaktliste.view.Main',
 	xtype: 'main',
 	config: 
 	{
-		items: 
-		{
-			xtype: 'kontaktlist'
-		},
+		items:
+		[
+			{
+				xtype: 'kontaktlist'
+			},
+		],
 		
 		defaultBackButtonText: 'Zurück'
-	}
+	},
 });
+

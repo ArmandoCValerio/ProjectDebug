@@ -11,7 +11,7 @@ Ext.define('Kontaktliste.store.Kontakte',
 			{
 				type: 'json'
 			},
-		
+			
 			listeners: 
 			{
 				exception: function(proxy, request)
@@ -22,6 +22,14 @@ Ext.define('Kontaktliste.store.Kontakte',
 		},	
 		
 		model: 'Kontaktliste.model.Kontakt',		
+		sorters: 'cNName',
+		grouper: 
+		{
+			groupFn: function(record) 
+			{
+				return record.get('cNName')[0];
+			}
+		},
 		autoLoad: true
 	}
 });

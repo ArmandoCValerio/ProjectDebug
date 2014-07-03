@@ -12,45 +12,52 @@ Ext.define('Kontaktliste.view.KontaktForm',
 		items: 
 		[
 			{
-				xtype: 'textfield',
-				name:  'cNName',
-				label: 'Nachname',
-				readOnly: true
-			},
-			
-			{
-				xtype: 'textfield',
-				name:  'cVName',
-				label: 'Vorname',
-				readOnly: true
-			},
+				xtype: 'fieldset',
+				title: 'Kontakt',
+				items:
+				[
+					{
+						xtype: 'textfield',
+						name:  'cNName',
+						label: 'Nachname',
+						readOnly: true
+					},
+					
+					{
+						xtype: 'textfield',
+						name:  'cVName',
+						label: 'Vorname',
+						readOnly: true
+					},
 
-			{
-				xtype: 'textfield',
-				name:  'cPhone',
-				label: 'Telefon',
-				readOnly: true
-			},
+					{
+						xtype: 'textfield',
+						name:  'cPhone',
+						label: 'Telefon',
+						readOnly: true
+					},
 
-			{
-				xtype: 'emailfield',
-				name:  'cMail',
-				label: 'eMail',
-				readOnly: true
-			},
-			
-			{
-				xtype: 'textfield',
-				name:  'cCompany',
-				label: 'Firma',
-				readOnly: true
-			},
-			
-			{
-				xtype: 'textfield',
-				name:  'cCity',
-				label: 'Ort',
-				readOnly: true
+					{
+						xtype: 'emailfield',
+						name:  'cMail',
+						label: 'eMail',
+						readOnly: true
+					},
+					
+					{
+						xtype: 'textfield',
+						name:  'cCompany',
+						label: 'Firma',
+						readOnly: true
+					},
+					
+					{
+						xtype: 'textfield',
+						name:  'cCity',
+						label: 'Ort',
+						readOnly: true
+					}
+				]
 			},
 			
 			{
@@ -70,7 +77,7 @@ Ext.define('Kontaktliste.view.KontaktForm',
 						xtype: 'textfield',
 						name:  'cAlter',
 						label: 'Alter',
-						readOnly: false
+						readOnly: true
 					}
 				]
 			},
