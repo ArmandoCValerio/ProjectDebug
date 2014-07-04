@@ -1,6 +1,7 @@
 Ext.define('Kontaktliste.store.Kontakte', 
 {
 	extend: 'Ext.data.Store',
+	id: 'Kontakte',
 	config: 
 	{
 		proxy:

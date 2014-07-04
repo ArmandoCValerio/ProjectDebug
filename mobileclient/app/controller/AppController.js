@@ -11,10 +11,11 @@ Ext.define('Kontaktliste.controller.AppController',
 					itemtap: 'showKontaktDetails',
 					releaseRefreshText: 'Lass loss...',
 				},
-				
+
 				main:
 				{
 					doubletap: 'initKontaktList',
+					
 				}
 		},
 
