@@ -1,7 +1,6 @@
 Ext.define('Kontaktliste.view.KontaktForm', 
 {
 	extend: 'Ext.form.Panel',
-	//extend: 'Ext.tab.Panel',
 	xtype: 'kontaktform',
 	requires: 
 	[
@@ -9,7 +8,6 @@ Ext.define('Kontaktliste.view.KontaktForm',
 		'Ext.tab.Panel',
 		'Ext.form.FieldSet',
 		'Ext.field.Text',
-		'Ext.field.Select'
 	],
 	
 	config: 
@@ -43,7 +41,6 @@ Ext.define('Kontaktliste.view.KontaktForm',
 						xtype: 'textfield',
 						name:  'cPhone',
 						label: 'Telefon',
-						required: true,
 						readOnly: true
 					},
 
@@ -58,6 +55,7 @@ Ext.define('Kontaktliste.view.KontaktForm',
 						xtype: 'textfield',
 						name:  'cCompany',
 						label: 'Firma',
+						required: true,
 						readOnly: true
 					},
 					
@@ -143,14 +141,18 @@ Ext.define('Kontaktliste.view.KontaktForm',
 			},
 			items:
 			[
-				//{ iconCls: 'action' },
-				//{ iconCls: 'add' },
-				//{ iconCls: 'arrow_up' },
-				//{ iconCls: 'arrow_right' },
-				//{ iconCls: 'arrow_down' },
-				//{ iconCls: 'arrow_left' },
+				{
+					iconCls: 'arrow_left',
+					id: 'backicon',
+					handler: function()
+					{
+						Ext.Msg.alert("Back button click!");
+					}
+				},
+				
 				{ 
 					iconCls: 'home',
+					id: 'homeicon',
 					handler: function()
 					{
 						Ext.Msg.alert("Home button click!");
@@ -159,52 +161,49 @@ Ext.define('Kontaktliste.view.KontaktForm',
 								
 				{
 					iconCls: 'compose',
-					scope: this,
-					handler: function(btn)
+					id: 'editicon',
+					handler: function()
 					{
 						Ext.Msg.alert("Kontakt editieren");
-						if  (btn.hasDisabled)
-						{
-							Ext.getCmp('daten').enable();
-							Ext.getCmp('ich').enable();
-							btn.hasDisabled = false;
-						} else
-						  {
-							Ext.getCmp('daten').disable();
-							Ext.getCmp('ich').disable();
-							btn.hasDisabled = true;
-						   }
 					}
 				},
 
 				{
 					iconCls: 'delete',
+					id: 'deleteicon',
 					handler: function()
 					{
 						Ext.Msg.alert("Kontakt löschen!");
 					}
 				},
+				
 				{ iconCls: ' ' },
-				//{ iconCls: 'reply' },
-				//{ iconCls: 'search' },
+
 				{
 					iconCls: 'star',
+					id: 'staricon',
 					handler: function()
 					{
 						Ext.Msg.alert("Als Favorit markieren!");
 					}
 				},
+				
 				//{ iconCls: 'locate' },
+				
 				{
 					iconCls: 'maps',
+					id: 'mapsicon',
 					handler: function()
 					{
 						Ext.Msg.alert("Standort anzeigen!");
 					}
 				},
+				
 				//{ iconCls: 'trash' },
+				
 				{
 					iconCls: 'refresh',
+					id: 'refreshicon',
 					handler: function()
 					{
 						Ext.Msg.alert("Kontakt aktualisieren!");

@@ -10,15 +10,19 @@ Ext.Loader.setPath({
 Ext.application({
     name: "Kontaktliste",
 
-    requires: [
-      "Ext.MessageBox"
+    requires: 
+	[
+      "Ext.MessageBox",
+      "Ext.plugin.PullRefresh",
+      "Ext.data.proxy.Rest",
     ],
     
     views: 
 	[
         "Main",
 		"KontaktList",
-		"KontaktForm"
+		"KontaktForm",
+		//"MessageBox"
     ],
 	
 	stores: 

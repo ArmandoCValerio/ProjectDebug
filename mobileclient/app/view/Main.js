@@ -11,7 +11,7 @@ Ext.define('Kontaktliste.view.Main',
 			},
 		],
 		
-		defaultBackButtonText: 'Zurück'
+		defaultBackButtonText: 'Zurück',
 	},
 });
 

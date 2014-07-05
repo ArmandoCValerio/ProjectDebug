@@ -6,22 +6,48 @@ Ext.define('Kontaktliste.controller.AppController',
 		control: 
 		{
 				kontaktlist:
-				{
-					//doubletap: 'initKontaktList',
-					itemtap: 'showKontaktDetails',
-					releaseRefreshText: 'Lass loss...',
-				},
+					{
+						itemtap: 'showKontaktDetails',
+					},		
+					'#listrefreshicon':
+					{
+						tap: 'refreshKontaktList'
+					},
+				
+			//	kontaktform:
+					'#refreshicon':
+					{
+						tap: 'refreshKontakt'
+					},		
+					'#homeicon':
+					{
+						tap: 'refreshKontaktList'
+					},
+					'#backicon':
+					{
+						tap: 'refreshKontaktList'
+					},
+					'#deleteicon':
+					{
+						tap: 'showConfirmDeleteDialog'
+					},
 
-				main:
-				{
-					doubletap: 'initKontaktList',
-					
-				}
+				main: 
+					{
+
+					}
+				
 		},
 
 		refs: 
 		{
 			main: 'main',
+			KontaktForm: 'kontaktform',
+			deleteicon: '#deleteicon',
+			homeicon: '#homeicon',
+			refreshicon: '#refreshicon',
+			listrefreshicon: '#listrefreshicon',
+			backicon: '#backicon',
 		}
 	},
 		
@@ -37,10 +63,58 @@ Ext.define('Kontaktliste.controller.AppController',
 		main.push(kontaktForm);	
 	},
 	
-	initKontaktList: function(list, index, target, record)
+	showConfirmDeleteDialog: function()
 	{
-		Ext.Msg.alert('Ausgeführt:', 'itemdoubletap');
-		console.log('element tap!');
+		Ext.Msg.confirm('Wirklich löschen?', this.deleteKontakt, this);
+	},
+	
+	refreshKontaktList: function()
+	{
+		Ext.Msg.alert("refreshKontaktList");
+		var kontakte = Ext.getStore('Kontakte');
+		kontakte.sync(
+		{
+			callback: function()
+			{
+				this.getMain().pop();
+			},
+			scope: this
+		});
+	},
+	
+	refreshKontak: function()
+	{
+		Ext.Msg.alert("refreshKontakt");
+		var kontakt = this.getKontaktForm().getRecord();
+		var kontakte = Ext.getStore('Kontakte');
+		
+		kontakte.sync(
+		{
+			callback: function()
+			{
+				this.getKontaktForm().push();
+			},
+			scope: this
+		});
+	},
+	
+	deleteKontakt: function(buttonId)
+	{
+		if (buttonId != 'yes')
+		{
+			return;
+		}
+		var kontakt = this.getKontaktForm().getRecord();
+		var kontakte = Ext.getStore('Kontakte');
+		kontakte.remove(kontakt);
+		kontakte.sync(
+		{
+			callback: function()
+			{
+				this.getMain().pop();
+			},
+			scope: this
+		});
 	},
 	
 	computeAge: function(bDate)

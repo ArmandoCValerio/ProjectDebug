@@ -21,6 +21,7 @@ $.widget("kontakt.kontaktListe",
 	reload: function()
 	{
 		this.element.find(".kontakt:not(.template)").remove();
+		//this.element.find(".template").remove();
 		this._load();
 	},
    

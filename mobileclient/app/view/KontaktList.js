@@ -5,26 +5,39 @@ Ext.define('Kontaktliste.view.KontaktList',
 	requires:
 	[
 		'Ext.field.Search',
+		'Ext.plugin.PullRefresh',
+		'Ext.plugin.ListPaging',
 	],
+	
 	config: 
 	{
-
 		store: 'Kontakte',
+		xtyp: 'kontaktlist',
+		ui: 'round',
+		pinHeaders: false,
+		itemTpl: '<div>Name: {cNName}, {cVName}</div><div>Mail: {cMail}</div><div>Phone: {cPhone}</div>',
+		grouped: true,
+		title: 'Kontaktliste',
+		emptyText: 'keine Kontakte',
 		
 		plugins: 
 		[
 			{
-				xclass: 'Ext.plugin.ListPaging',
+				type: 'listpaging',
 				autoPaging: false,
 				loadMoreText: 'Weitere Kontakte ...',
 				noMoreRecordsText: 'Keine weiteren Kontakte!'
 			},
 			
-			// {
-                // xclass: 'Ext.plugin.PullRefresh',
-                // pullRefreshText: 'Aktualisieren...',
-				
-            // }
+			{
+				type: 'pullrefresh',
+				pullText: 'Zum Aktualisieren herunterziehen ...',
+				releaseText: 'Zum Aktualisieren losslassen ...',
+				loadingText: 'Laden ...',
+				loadedText: '',
+				lastUpdatedText: '',
+				lastUpdatedDateFormat: ' ',
+            }
 		],
 		
 		items: 
@@ -42,6 +55,7 @@ Ext.define('Kontaktliste.view.KontaktList',
 				[
 					{
 						iconCls: 'add',
+						id: 'listaddicon',
 						handler: function()
 						{
 							Ext.Msg.alert("Kontakt hinzufügen!");
@@ -50,24 +64,16 @@ Ext.define('Kontaktliste.view.KontaktList',
 					
 					{
 						iconCls: 'star',
+						id: 'liststaricon',
 						handler: function()
 						{
 							Ext.Msg.alert("Favoriten anzeigen!");
 						}
 					},
-					
-					//{ iconCls: 'action' },
-					//{ iconCls: 'arrow_up' },
-					//{ iconCls: 'arrow_right' },
-					//{ iconCls: 'arrow_down' },
-					//{ iconCls: 'arrow_left' },
-					//{ iconCls: 'compose' },
-					//{ iconCls: 'delete' },
-					//{ iconCls: 'reply' },
-					//{ iconCls: 'home' },
-					//{ iconCls: 'locate' },
+	
 					{
 						iconCls: 'maps',
+						id: 'listmapsicon',
 						handler: function()
 						{
 							Ext.Msg.alert("Kontakte in der Nähe anzeigen!");
@@ -76,10 +82,10 @@ Ext.define('Kontaktliste.view.KontaktList',
 					
 					{
 						iconCls: 'refresh',
+						id: 'listrefreshicon',
 						handler: function()
 						{
 							Ext.Msg.alert("Kontaktliste aktualisieren!");
-							Ext.getCmp('kontaktlist').reset();
 						}
 					},
 					
@@ -89,6 +95,7 @@ Ext.define('Kontaktliste.view.KontaktList',
 					
 					{
 						iconCls: 'settings',
+						id: 'listsettingsicon',
 						handler: function()
 						{
 							Ext.Msg.alert("Einstellungen!");
@@ -97,6 +104,7 @@ Ext.define('Kontaktliste.view.KontaktList',
 					
 					{
 						iconCls: 'trash',
+						id: 'listtrashicon',
 						handler: function()
 						{
 							Ext.Msg.alert("Gelöschte Kontakte!");
@@ -108,6 +116,7 @@ Ext.define('Kontaktliste.view.KontaktList',
 					},
 					{
 						iconCls: 'search',
+						id: 'listsearchicon',
 						handler: function()
 							{
 								Ext.Msg.prompt("Kontakt suchen ...");
@@ -121,15 +130,5 @@ Ext.define('Kontaktliste.view.KontaktList',
 				}			
 			}
 		],	
-
-		
-		xtyp: 'kontaktlist',
-		ui: 'round',
-		pinHeaders: false,
-		itemTpl: '<div>Name: {cNName}, {cVName}</div><div>Mail: {cMail}</div><div>Phone: {cPhone}</div>',
-		grouped: true,
-		title: 'Kontaktliste',
-		
-		emptyText: 'keine Kontakte'
 	},
 });

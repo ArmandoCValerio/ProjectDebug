@@ -43,7 +43,11 @@ Ext.define('Kontaktliste.model.Kontakt',
 			},		
 			{
 				name: 'cUpdtUser'
+			},
+			{
+				name: 'cVersion'
 			}
-		]
+		],
+		idProperty: 'url', //Entfernen doppelter Einträge nach Reload
 	}
 });
