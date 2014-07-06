@@ -1,7 +1,7 @@
 <?php
 
 class UpdateKontaktCommand 
-	{
+{
 	private $Result = array();
 	
 	public function execute($request, $request_headers)
@@ -48,66 +48,61 @@ class UpdateKontaktCommand
 		$Result[0] = ErrIds::cOK;
 		
 		$id = 0;
-			
-		// Formale Prüfung der Requestsfelder
 		if ((isset($request["id"]) !== TRUE) or
 			(is_numeric($request["id"]) !== TRUE))
 		{
 			$Result[0] = errIds::cErrWrongParameter;
+			return $Result;
 		}
 		
 		if ((isset($request["cVName"]) !== TRUE) or
 			($request["cVName"]) == NULL)
 		{
-			$Result[0] = ErrIds::cErrWrongParameter;
+			$Result[0] = ErrIds::cErrInputVName;
+			return $Result;
 		}
 		
 		if ((isset($request["cNName"]) !== TRUE) or
-			($request["cNName"]) == NULL)
+			($request["cNName"]) == "")
 		{
-			$Result[0] = ErrIds::cErrWrongParameter;
+			$Result[0] = ErrIds::cErrInputNName;
+			return $Result;
 		}
 		
 		if ((isset($request["cCompany"]) !== TRUE) or
 			($request["cCompany"]) == NULL)
 		{
-			$Result[0] = ErrIds::cErrWrongParameter;
-		}
-		
-		if ((isset($request["cCity"]) !== TRUE) or
-			($request["cCity"]) == NULL)
-		{
-			$Result[0] = ErrIds::cErrWrongParameter;
-		}
-		
-		if ((isset($request["cBirthDay"]) !== TRUE) or
-			($request["cBirthDay"]) == NULL)
-		{
-			$Result[0] = ErrIds::cErrWrongParameter;
-		}
-		
-		if ((isset($request["cMail"]) !== TRUE) or
-			($request["cMail"]) == NULL)
-		{
-			$Result[0] = ErrIds::cErrWrongParameter;
-		}
-		
-		if ((isset($request["cPhone"]) !== TRUE) or
-			($request["cPhone"]) == NULL)
-		{
-			$Result[0] = ErrIds::cErrWrongParameter;
+			$Result[0] = ErrIds::cErrInputCompany;
+			return $Result;
 		}
 		
 		if ((isset($request_headers["If-Match"]) !== TRUE) or
 			($request_headers["If-Match"]) == NULL)
 		{
 			$Result[0] = ErrIds::cErrWrongParameter;
+			return $Result;
 		}
-	
+		
+		if (isset($request["cCity"]) !== TRUE)
+		{
+			$Result[0] = ErrIds::cErrWrongParameter;
+		}
+		
+		if (isset($request["cBirthDay"]) !== TRUE)
+		{
+			$Result[0] = ErrIds::cErrWrongParameter;
+		}
+		
+		if (isset($request["cMail"]) !== TRUE)
+		{
+			$Result[0] = ErrIds::cErrWrongParameter;
+		}
+		
+		if (isset($request["cPhone"]) !== TRUE)
+		{
+			$Result[0] = ErrIds::cErrWrongParameter;
+		}
 		return $Result;
-	
 	}
-	
-	}
-
+}
 ?>

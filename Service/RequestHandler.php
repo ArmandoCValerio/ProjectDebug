@@ -73,7 +73,7 @@
 			If ($Result[0] !== ErrIds::cOK) 
 			{					
 				$errText = $errObj->getError($Result[0]);
-				echo(json_encode($Result[0]," ",$errText));
+				echo(json_encode($errText));
 				//var_dump("ErrorCode:",$Result[0]," ",$errText);
 				//var_dump("Message: ",$errObj->validationMessage);	
 			}
