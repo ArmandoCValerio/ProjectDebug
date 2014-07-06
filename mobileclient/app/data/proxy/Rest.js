@@ -31,7 +31,7 @@ Ext.define('Kontaktliste.data.proxy.Rest',
 		var headers = this.getHeaders();
 		try 
 		{
-			headers['If-Match'] = operation.getRecords()[0].data.version;
+			headers['If-Match'] = operation.getRecords()[0].data.cVersion;
 			return this.callParent(arguments);
 		} finally
 			{
