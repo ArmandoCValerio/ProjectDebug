@@ -38,7 +38,7 @@
 				if ($Result[0] == errIds::cOK)
 				{						
 					header("HTTP/1.1 201");
-					header("Location: /BIM-WMD-SS-2014-Kontakt/Service/Kontakte");
+					header("Location: /ProjectDebug/Service/Kontakte");
 				}
 			
 			}

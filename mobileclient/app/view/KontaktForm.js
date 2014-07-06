@@ -8,6 +8,7 @@ Ext.define('Kontaktliste.view.KontaktForm',
 		'Ext.tab.Panel',
 		'Ext.form.FieldSet',
 		'Ext.field.Text',
+		'Ext.field.DatePicker',
 	],
 	
 	config: 
@@ -129,93 +130,6 @@ Ext.define('Kontaktliste.view.KontaktForm',
 					}
 				]
 			},	
-		//],	
-		{
-			xtype: 'toolbar',
-			ui: 'neutral',
-			docked: 'bottom',
-			defaults:
-			{
-				iconMask: true,
-				ui: 'plain'
-			},
-			items:
-			[
-				{
-					iconCls: 'arrow_left',
-					id: 'backicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Back button click!");
-					}
-				},
-				
-				{ 
-					iconCls: 'home',
-					id: 'homeicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Home button click!");
-					}
-				},
-								
-				{
-					iconCls: 'compose',
-					id: 'editicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Kontakt editieren");
-					}
-				},
-
-				{
-					iconCls: 'delete',
-					id: 'deleteicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Kontakt löschen!");
-					}
-				},
-				
-				{ iconCls: ' ' },
-
-				{
-					iconCls: 'star',
-					id: 'staricon',
-					handler: function()
-					{
-						Ext.Msg.alert("Als Favorit markieren!");
-					}
-				},
-				
-				//{ iconCls: 'locate' },
-				
-				{
-					iconCls: 'maps',
-					id: 'mapsicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Standort anzeigen!");
-					}
-				},
-				
-				//{ iconCls: 'trash' },
-				
-				{
-					iconCls: 'refresh',
-					id: 'refreshicon',
-					handler: function()
-					{
-						Ext.Msg.alert("Kontakt aktualisieren!");
-						
-					},
-				},
-			],
-			layout:
-			{
-				pack: 'center',
-				align: 'center'
-			}
-		}],
+		],	
 	},
 });

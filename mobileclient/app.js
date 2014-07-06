@@ -13,8 +13,8 @@ Ext.application({
     requires: 
 	[
       "Ext.MessageBox",
-      "Ext.plugin.PullRefresh",
-      "Ext.data.proxy.Rest",
+      "Kontaktliste.plugin.PullRefresh",
+      "Kontaktliste.data.proxy.Rest",
     ],
     
     views: 
@@ -22,7 +22,7 @@ Ext.application({
         "Main",
 		"KontaktList",
 		"KontaktForm",
-		//"MessageBox"
+		"MessageBox"
     ],
 	
 	stores: 

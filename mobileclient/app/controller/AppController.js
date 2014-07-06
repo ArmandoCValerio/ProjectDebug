@@ -9,48 +9,54 @@ Ext.define('Kontaktliste.controller.AppController',
 					{
 						itemtap: 'showKontaktDetails',
 					},		
-					'#listrefreshicon':
+					'#refreshListButton':
 					{
 						tap: 'refreshKontaktList'
 					},
 				
-			//	kontaktform:
-					'#refreshicon':
+					'#refreshDetailButton':
 					{
 						tap: 'refreshKontakt'
 					},		
-					'#homeicon':
+					'#homeButton':
 					{
-						tap: 'refreshKontaktList'
+						tap: 'goHomeButton'
 					},
-					'#backicon':
-					{
-						tap: 'refreshKontaktList'
-					},
-					'#deleteicon':
+					'#deleteButton':
 					{
 						tap: 'showConfirmDeleteDialog'
 					},
-
 				main: 
 					{
-
-					}
-				
+						push: 'showFormButtons',
+						pop:  'hideFormButtons'
+					},	
 		},
 
 		refs: 
 		{
 			main: 'main',
 			KontaktForm: 'kontaktform',
-			deleteicon: '#deleteicon',
-			homeicon: '#homeicon',
-			refreshicon: '#refreshicon',
-			listrefreshicon: '#listrefreshicon',
-			backicon: '#backicon',
+			deleteButton: '#deleteButton',
+			homeButton: '#homeButton',
+			refreshDetailButton: '#refreshDetailButton',
+			refreshListButton: '#refreshListButton',
+			detailButtons: '#detailButtons',
 		}
 	},
-		
+	
+	showFormButtons: function()
+	{
+		Ext.getCmp('detailButtons').setHidden(false);
+		Ext.getCmp('listButtons').setHidden(true);
+	},
+
+	hideFormButtons: function()
+	{
+		Ext.getCmp('detailButtons').setHidden(true);
+		Ext.getCmp('listButtons').setHidden(false);
+	},
+	
 	showKontaktDetails: function(list, index, target, record)
 	{
 		var main = this.getMain();
@@ -65,12 +71,11 @@ Ext.define('Kontaktliste.controller.AppController',
 	
 	showConfirmDeleteDialog: function()
 	{
-		Ext.Msg.confirm('Wirklich löschen?', this.deleteKontakt, this);
+		Ext.Msg.confirm('Löschen', 'Wirklich löschen?', this.deleteKontakt, this);
 	},
 	
 	refreshKontaktList: function()
 	{
-		Ext.Msg.alert("refreshKontaktList");
 		var kontakte = Ext.getStore('Kontakte');
 		kontakte.sync(
 		{
@@ -82,7 +87,15 @@ Ext.define('Kontaktliste.controller.AppController',
 		});
 	},
 	
-	refreshKontak: function()
+	goHomeButton: function()
+	{
+		var kontakte = Ext.getStore('Kontakte');
+		kontakte.sync();
+		this.getMain().pop();
+		scope: this;
+	},
+	
+	refreshKontakt: function()
 	{
 		Ext.Msg.alert("refreshKontakt");
 		var kontakt = this.getKontaktForm().getRecord();
@@ -92,7 +105,7 @@ Ext.define('Kontaktliste.controller.AppController',
 		{
 			callback: function()
 			{
-				this.getKontaktForm().push();
+				this.getKontaktForm().pop();
 			},
 			scope: this
 		});
@@ -147,5 +160,4 @@ Ext.define('Kontaktliste.controller.AppController',
 		};
 		return wAlter;
 	}
-	
 });

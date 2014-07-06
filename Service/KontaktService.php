@@ -129,22 +129,32 @@
 				// Prüfen, ob der Datensatz überhaupt besteht
 				$Result = $this->readKontakt($id);
 				if ($Result[0] == ErrIds::cOK)
-				{		$sqlState = 
-						"DELETE FROM " . $objDBcommand->gTable . " " . 
-						"WHERE cId = " . $id .
-						";";
-					 
-						echo $sqlState;
+				{		
+					// Datensatz darf sich zwischenzeitlich nicht geändert haben
+					If ($Result[1]->cVersion == $objKontakt->cVersion)
+					{
+						$sqlState = 
+							"DELETE FROM " . $objDBcommand->gTable . " " . 
+							"WHERE cId = " . $id .
+							";";
+						
+							//echo $sqlState;
 					
-						$Result = $objDBcommand->dbQuery($sqlState);			
-				}				
+							$Result = $objDBcommand->dbQuery($sqlState);
+					} else
+					{
+						$Result[0] = ErrIds::cErrRecordChanged;
+					}
+					
+				} else 
+				{
+					$Result[0] = ErrIds::cErrRecordNotFound;
+				}
 				
 				$objDBcommand->dbClose();
-
 			}
 		
 			return $Result;
-		
 			
 		}
 		

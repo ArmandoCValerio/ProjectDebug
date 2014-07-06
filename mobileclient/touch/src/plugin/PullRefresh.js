@@ -281,6 +281,7 @@ Ext.define('Ext.plugin.PullRefresh', {
         }
 
         store.insert(0, toInsert);
+	
         this.setState("loaded");
         this.fireEvent('latestfetched', this, toInsert);
         if (this.getAutoSnapBack()) {

@@ -59,10 +59,13 @@
 			if ($Result[0] == ErrIds::cOK)
 			{
 				$Result = $cmd->execute($request, $request_headers);
-				if  ($Result[1] !== NULL) 
+				if  ($Result[0] == ErrIds::cOK) 
 				{
-					//Formatierung in JSON-Zeichenkette
-					echo(json_encode($Result[1]));						
+					if  ($Result[1] !== NULL) 
+					{
+						//Formatierung in JSON-Zeichenkette
+						echo(json_encode($Result[1]));						
+					}
 				}
 			}
 			
@@ -70,8 +73,9 @@
 			If ($Result[0] !== ErrIds::cOK) 
 			{					
 				$errText = $errObj->getError($Result[0]);
-				var_dump("ErrorCode:",$Result[0]," ",$errText);
-				var_dump("Message: ",$errObj->validationMessage);	
+				echo(json_encode($Result[0]," ",$errText));
+				//var_dump("ErrorCode:",$Result[0]," ",$errText);
+				//var_dump("Message: ",$errObj->validationMessage);	
 			}
 		}
 	}		

@@ -4,82 +4,52 @@ $(function() {
 	// Registrieren einer Funktion, für das gesamte HTML $(document)
 	// .ajaxError: speziell bei Fehlern in HTTP Kommunikation
 	$(document).ajaxError(function(event, request)
-	{
-		if  (request.status == "400")
+	{	
+		if (request.status==400) 
 		{
-			return;
+			return; // Spaghetti = True;
 		}
-		
-		if  (request.status == "412")
-		{
-			return;
-		}
-		
+	
 		//alert(request.statusText); // Status aus Server-Response
 		$("#error_dialog").errorDialog("open", request.statusText);
+		$("#kontakt_liste").show();
+		$("#kontakt_details").hide();
 		
 		if (request.status==404) 
-		{
-			$("#kontakt_liste").show();
-			$("#kontakt_details").hide();
+		{		
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
 	});
 	
-		//bei HTTP Anfrage sperren der Oberfläsche
-	$(document).ajaxStart(function()						
-	{														
-		$.blockUI({ message: null });						
+	// Bei JEDER ajax-Anfrage wird die GUI zu erst blockiert
+	$(document).ajaxStart(function()
+	{
+		$.blockUI({message:null});
 	});
-
-	//bei HTTP Request entsperren der Oberfläsche
-	$(document).ajaxStop(function()					
-	{													    
-		$.unblockUI({ message: null });						
+	// Nach Beendigung JEDER ajax-Anfrage wird die UI wieder entsperrt
+	$(document).ajaxStop(function()
+	{
+		$.unblockUI();
 	});
 	
-	//Error Dialog Widget
-	$("#error_dialog").errorDialog();
-	
-	//MenuBar
+	// Menüleiste instanziieren
 	$("#menu_bar").menuBar(
 	{
-		onShowKontakteClicked: function()
-		{
-			$("#kontakt_list").kontaktList("reload");				//Refresh
+		onShowKontakteClicked: function() {
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
+			$("#kontakt_liste").kontaktListe("reload");
 		},
-
-		onCreateKontaktClicked: function()
-		{
-			alert("CREATE");
-		},
-	});
 		
-	//Dialog beim Löschen
-	$("#delete_dialog").deleteDialog(
-	{
-		onKontaktDeleted: function()
-		{
-			$("#kontakt_list").kontaktList("reload");				//Refresh
-		},
-	});
+		onCreateKontaktClicked: function() {
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
+			$("#create_dialog").createDialog("open");
+		}
+	}
+	);
 	
-	//Dialog für das editieren
-	$("#edit_dialog").editDialog(
-	{
-		onKontaktEdited: function()
-		{
-			$("#kontakt_list").kontaktList("reload");				//Refresh nach editieren
-		},
-
-		onKontaktCanceled: function()
-		{
-			$("#kontakt_list").kontaktList("reload");				//Refresh nach abbruch
-		},
-
-	});
-
 	// HTML Element verknüpfen und Widget namens "todoList" instanziieren
 	$("#kontakt_liste").kontaktListe(
 		{
@@ -96,22 +66,56 @@ $(function() {
 				//alert("delete");
 				$("#delete_dialog").deleteDialog("open",kontakt);
 			},
-	    
-		onEditKontaktClicked: function(event, kontakt)
-		{
-			$("#edit_dialog").editDialog("open",kontakt);
-		},	
 			
+			
+		onEditKontaktClicked: function(event, kontakt)
+			{
+				//alert("in application.js");
+				//$("#edit_dialog").show();
+				$("#edit_dialog").editDialog("open",kontakt);
+				
+			}
+						
+		});
+	
+	// Weitere Widgets instanziieren:
+	$("#error_dialog").errorDialog(); // = jQuery("error_dialog").todoList();
+	
+	$("#delete_dialog").deleteDialog(
+	{
+		onKontaktDeleted: function()
+		{
+			//alert("wirklich deleted");
+			$("#kontakt_liste").kontaktListe("reload");
+		}
 	});
 	
 	$("#kontakt_details").kontaktDetails(
 	{
-		onKontaktClicked: function(event,url)
+		/*onKontaktClicked: function(event,url)
 		{
 			$("#kontakt_details").hide();
 			$("#kontakt_liste").show();
 			$("#kontakt_liste").kontaktListe("reload"); //,url);
-		}	
+		}	*/
+	});
+	
+	$("#edit_dialog").editDialog(
+	{		
+		onKontaktUpdated: function()
+		{
+			alert("success: geupdated");
+			$("#kontakt_list").kontaktListe("reload");
+		}
+	});
+	
+	$("#create_dialog").createDialog(
+	{		
+		onKontaktCreated: function()
+		{
+			alert("success: created");
+			$("#kontakt_list").kontaktListe("reload");
+		}
 	});
 	
 });

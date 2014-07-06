@@ -30,12 +30,10 @@
       <a class="show_kontakte" href="#">Alle Kontakte</a>
       <a class="create_kontakt" href="#">Neuer Kontakt</a>
     </div>  
-  
-    <b>Kontakt-Liste</b>
     <div id="kontakt_liste">
-		<!--Kontakt-Liste -->
+	    <b>Kontakt-Liste</b>
 		<div class="kontakt template">
-
+			
 			<span>Name</span>		
 			<span class="nname">
 			</span>
@@ -51,16 +49,17 @@
 			<span>Telefon</span>
 			<span class="phone">
 			</span>
-		
+			
 			<a class="delete_kontakt" href="#">Löschen</a>
-			<a class="edit_kontakt" href="#">Bearbeiten</a>
-		
+			<a class="edit_kontakt" href="#">Bearbeiten</a>	
 		</div>
-		
     </div>
 
 	<div id="kontakt_details" class="ui-widget">
-		<span>Name</span>		
+		<div> 
+			<b>Kontakt-Details</b>
+		</div>
+		<span>Name<span>		
 		<span class="nname">
 		</span>
 		
@@ -107,7 +106,6 @@
 		<span>Aktualisiert durch:</span>
 		<span class="updtuser">
 		</span>
-		
 	</div>
 	
 	<div id="error_dialog" title="Fehler" class="ui-widget">
@@ -122,7 +120,7 @@
       <form>
         <table>
           <!--Pro Zeile 2 Felder, zu erst die mögliche Fehlernachricht -->
-		  <tr>
+		  <tr>    
             <td colspan="2"><span class="validation_message ui-state-error-text"></span></td>
           </tr>
 		  

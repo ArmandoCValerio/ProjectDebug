@@ -6,22 +6,25 @@ $.widget("kontakt.kontaktListe",
 	{
 		$.ajax(
 		{
-		   url: "/projectdebug/Service/Kontakte",
-		   //url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		   url: "/ProjectDebug/Service/Kontakte",
 		   dataType: "json",
 		   success: this._appendKontakte,
 		   context: this
 		});		
 	},
+	
   	_create: function() 
-    {					// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
+    {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		this._load();
 	},
   	
 	reload: function()
 	{
-		this.element.find(".kontakt:not(.template)").remove();
-		//this.element.find(".template").remove();
+		//this.element.find(".kontakt:not(.template)").remove();
+		KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
+		KontaktButNotTemplate.remove();
+		//console.debug(abc);
+		
 		this._load();
 	},
    
@@ -39,6 +42,7 @@ $.widget("kontakt.kontaktListe",
 			kontaktElement.removeClass("template"); // Klassenbezeichner aus HTML entfernen
 			
 			kontaktElement.find(".nname").text(kontakt.cNName);
+			kontaktElement.find(".vname").text(kontakt.cVName);
 			kontaktElement.find(".company").text(kontakt.cCompany);
 			kontaktElement.find(".phone").text(kontakt.cPhone);
 			
@@ -48,7 +52,7 @@ $.widget("kontakt.kontaktListe",
 			// und zwischengespeichert. Die Funktion wird erst später bei klick ausgeführt.
 			// Sonst hätte todo.url immer den Wert des letzten Todos.....
 			kontaktElement.click(kontakt.url, function(event)
-			{				
+			{
 				that._trigger("onKontaktClicked", null, event.data); // "Geklickt" zurückgeben
 			});
 			
@@ -59,6 +63,13 @@ $.widget("kontakt.kontaktListe",
 				// Event Bubble deaktivieren und Browser-Aktion (Link verfolgen) 
 				// ausschalten. Nun kommen keine weiteren Eventhandler zum Zuge:
 				return false; 
+			});
+			
+			kontaktElement.find(".edit_kontakt").click(kontakt, function(event)
+			{			
+				//alert("Edit-Todo");
+				that._trigger("onEditKontaktClicked", null, event.data); // "Geklickt" zurückgeben
+				return false;
 			});
 			
 			this.element.append(kontaktElement); // Element nun in HTML anhängen		
