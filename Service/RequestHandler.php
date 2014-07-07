@@ -64,6 +64,7 @@
 					if  ($Result[1] !== NULL) 
 					{
 						//Formatierung in JSON-Zeichenkette
+						header("HTTP/1.1 200");
 						echo(json_encode($Result[1]));						
 					}
 				}

@@ -12,11 +12,11 @@ $(function() {
 	
 		//alert(request.statusText); // Status aus Server-Response
 		$("#error_dialog").errorDialog("open", request.statusText);
-		$("#kontakt_liste").show();
-		$("#kontakt_details").hide();
 		
 		if (request.status==404) 
 		{		
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
